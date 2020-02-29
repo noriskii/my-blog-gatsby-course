@@ -19,9 +19,9 @@ const PostItem = ({
         <S.PostItemDate>
           {date} • {timeToRead} min de leitura
         </S.PostItemDate>
-        <S.PostItemInfo>
+        <S.PostItemTitle>
           {title}
-        </S.PostItemInfo>
+        </S.PostItemTitle>
         <S.PostItemDescription>
           {description}
         </S.PostItemDescription>
