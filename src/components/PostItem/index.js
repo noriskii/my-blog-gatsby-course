@@ -28,7 +28,7 @@ const PostItem = ({
       </S.PostItemInfo>
     </S.PostItemWrapper>
   </S.PostItemLink>
-);
+)
 
 PostItem.propTypes = {
   slug: PropTypes.string.isRequired,
