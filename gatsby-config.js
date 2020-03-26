@@ -1,6 +1,6 @@
-require('dotenv').config()
+require("dotenv").config()
 
-const queries = require('./src/utils/algolia_queries')
+const queries = require("./src/utils/algolia_queries")
 
 module.exports = {
   siteMetadata: {
@@ -10,6 +10,7 @@ module.exports = {
     author: `@lucksaug`,
   },
   plugins: [
+    `gatsby-plugin-transition-link`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     // needs to be the first to work with gatsby-remark-images
@@ -63,7 +64,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-algolia-search`,
       options: {
-        appId: process.env.GATSBY_ALGOLIA_APP_ID, 
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
         apiKey: process.env.ALGOLIA_ADMIN_KEY,
         indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME, // for all queries
         queries,
