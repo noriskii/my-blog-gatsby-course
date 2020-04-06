@@ -8,7 +8,7 @@ module.exports = {
     position: "Front-End Developer",
     description: `Analista de Sistemas na Ericsson Inovação, escrevo sobre Front-End, Lettering e Design...`,
     author: `@lucksaug`,
-    siteUrl: `https://lucks.com.br`,
+    siteUrl: `https://lucas-gatsby-course.netlify.com`,
   },
   plugins: [
     `gatsby-plugin-transition-link`,
