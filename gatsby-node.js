@@ -26,43 +26,44 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   return graphql(`
-  {
-    allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}) {
-      edges {
-        node {
-          frontmatter {
-            background
-            category
-            date(locale: "pt-br", formatString: "DD [de] MMMM [de] YYYY")
-            description
-            title
+    {
+      allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
+        edges {
+          node {
+            frontmatter {
+              background
+              category
+              date(locale: "pt-br", formatString: "DD [de] MMMM [de] YYYY")
+              description
+              title
+              image
+            }
+            timeToRead
+            fields {
+              slug
+            }
           }
-          timeToRead
-          fields {
-            slug
+          next {
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+            }
           }
-        }
-        next {
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-          }
-        }
-        previous {
-          fields {
-            slug
-          }
-          frontmatter {
-            title
+          previous {
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+            }
           }
         }
       }
     }
-  }    
   `).then(result => {
-    const posts = result.data.allMarkdownRemark.edges; 
+    const posts = result.data.allMarkdownRemark.edges
 
     posts.forEach(({ node, next, previous }) => {
       createPage({
@@ -78,19 +79,19 @@ exports.createPages = ({ graphql, actions }) => {
       })
     })
 
-    const postsPerPage = 6;
-    const numPages = Math.ceil(posts.length / postsPerPage);
+    const postsPerPage = 6
+    const numPages = Math.ceil(posts.length / postsPerPage)
 
     Array.from({ length: numPages }).forEach((_, index) => {
       createPage({
         path: index === 0 ? `/` : `/page/${index + 1}`,
-        component: path.resolve('./src/templates/blog-list.js'),
+        component: path.resolve("./src/templates/blog-list.js"),
         context: {
           limit: postsPerPage,
           skip: index * postsPerPage,
           numPages,
           currentPage: index + 1,
-        }
+        },
       })
     })
   })

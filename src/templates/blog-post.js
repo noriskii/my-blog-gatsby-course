@@ -1,15 +1,14 @@
-import React from 'react';
-import { graphql } from 'gatsby';
+import React from "react"
+import { graphql } from "gatsby"
 
 import Layout from "../components/Layout"
 import SEO from "../components/seo"
 import RecommendedPosts from "../components/RecommendedPosts"
 import Comments from "../components/Comments"
 
-import * as S from '../components/Post/styled'
+import * as S from "../components/Post/styled"
 
 const BlogPost = ({ data, pageContext }) => {
-
   // const { markdownRemark } = useStaticQuery(
   //   graphql`
   //   query Post($slug: String!) {
@@ -28,7 +27,11 @@ const BlogPost = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <SEO title={post.frontmatter.title} />
+      <SEO
+        title={post.frontmatter.title}
+        description={post.frontmatter.description}
+        image={post.frontmatter.image}
+      />
       <S.PostHeader>
         <S.PostDate>
           {post.frontmatter.date} • {post.timeToRead} min de leitura
@@ -39,7 +42,7 @@ const BlogPost = ({ data, pageContext }) => {
       <S.MainContent>
         <div dangerouslySetInnerHTML={{ __html: post.html }}></div>
       </S.MainContent>
-      <RecommendedPosts next={next} previous={previous}/>
+      <RecommendedPosts next={next} previous={previous} />
       <Comments url={post.fields.slug} title={post.frontmatter.title} />
     </Layout>
   )
@@ -47,7 +50,7 @@ const BlogPost = ({ data, pageContext }) => {
 
 export const query = graphql`
   query Post($slug: String!) {
-    markdownRemark(fields: {slug: {eq: $slug}}) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
       fields {
         slug
       }
@@ -55,6 +58,7 @@ export const query = graphql`
         title
         description
         date(locale: "pt-br", formatString: "DD [de] MMMM [de] YYYY")
+        image
       }
       html
       timeToRead
@@ -62,4 +66,4 @@ export const query = graphql`
   }
 `
 
-export default BlogPost;
+export default BlogPost
